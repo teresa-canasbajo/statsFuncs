@@ -38,3 +38,7 @@ def point_in_circle(angle, center_circle, radius_circle):
     coordinates_blob = (x, y)
 
     return coordinates_blob
+
+
+def midpoint(point1, point2):
+    return int((point1[0] + point2[0]) / 2) , int((point1[1] + point2[1]) / 2)
