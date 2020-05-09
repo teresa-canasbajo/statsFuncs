@@ -8,11 +8,27 @@ def mean_confidence_interval(data, confidence=0.95):
     h = se * scipy.stats.t.ppf((1 + confidence) / 2., n-1)
     return m, m-h, m+h
 
-def alternative_mean_confidence_interval(data):
+def mean_confidence_interval_plusminus(data):
 
     sample_mean = np.mean(data)
     sample_95ci = 1.96 * scipy.stats.sem(data)
-    # sample_min = sample_mean = sample_95ci
+    # sample_min = sample_mean - sample_95ci
     # sample_max = sample_mean + sample_95ci
 
     return sample_mean, sample_95ci
+
+def confidence_interval_percentile(data, top=97, bottom=2.5):
+
+    mean = np.mean(data)
+    sorted_data = sorted(data)
+
+    position_top = int((top/100) * len(data))
+    position_bottom = int((bottom/100) * len(data))
+
+    ci_low = sorted_data[position_bottom]
+    ci_up = sorted_data[position_top]
+
+    return mean, ci_low, ci_up
+
+
+
