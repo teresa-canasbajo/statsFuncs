@@ -30,5 +30,14 @@ def confidence_interval_percentile(data, top=97, bottom=2.5):
 
     return mean, ci_low, ci_up
 
+def mean_sem(data):
+
+    mean, se = np.mean(data), scipy.stats.sem(data)
+    high = mean + se
+    low = mean - se
+
+    return mean, high, low
+
+
 
 
