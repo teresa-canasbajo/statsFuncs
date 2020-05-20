@@ -3,6 +3,7 @@ import pandas as pd
 import random
 import matplotlib.pyplot as plt
 from scipy import stats
+import seaborn as sns
 
 def compNullNormal(normalXYCorr, normalXDist, normalYDist, xlabel, ylabel, title=''):
 
@@ -27,3 +28,29 @@ def nullCorrDistBoot(normalXDist, normalYDist, nIterations=10000):
         corr_list.append(r[0])
 
     return corr_list
+
+
+def substract2Dist(dist1, dist2):
+
+    # calculate difference
+    diff_dist = dist1-dist2
+
+    # calculate p value
+    bootP = np.sum(diff_dist > 0) / len(diff_dist);
+    print(bootP)
+    if bootP < .5:
+        bootTwoTailedP = bootP * 2;
+    else:
+        bootTwoTailedP = (1 - bootP) * 2;
+
+    # plot
+    plt.figure(figsize=(5, 5))
+
+    sns.distplot(dist1, label='Bin1')
+    sns.distplot(dist2, label='Bin2')
+    sns.distplot(diff_dist, label='difference')
+    sns.despine()
+    plt.legend()
+    plt.title('p = ' + str(bootTwoTailedP))
+    plt.show()
+
