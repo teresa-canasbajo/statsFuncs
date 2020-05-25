@@ -54,3 +54,29 @@ def substract2Dist(dist1, dist2):
     plt.title('p = ' + str(bootTwoTailedP))
     plt.show()
 
+def sigDistribution(dist, extra_title=' ', xlim=None, ylim=None):
+
+
+    # calculate p value
+    bootP = np.sum(dist > 0) / len(dist);
+    print(bootP)
+    if bootP < .5:
+        bootTwoTailedP = bootP * 2;
+    else:
+        bootTwoTailedP = (1 - bootP) * 2;
+
+    # plot
+    plt.figure(figsize=(5, 5))
+
+    sns.distplot(dist, label='Distribution')
+    sns.despine()
+
+    if xlim is not None:
+        plt.xlim(xlim)
+    if ylim is not None:
+        plt.ylim(ylim)
+
+    plt.legend()
+    plt.title('p = ' + str(bootTwoTailedP) + extra_title)
+    plt.show()
+
