@@ -68,7 +68,7 @@ def sigDistribution(dist, extra_title=' ', xlim=None, ylim=None):
     # plot
     plt.figure(figsize=(5, 5))
 
-    sns.distplot(dist, label='Distribution')
+    plt.hist(dist, label='Distribution')
     sns.despine()
 
     if xlim is not None:

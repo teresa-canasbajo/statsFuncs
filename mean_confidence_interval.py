@@ -36,7 +36,7 @@ def mean_sem(data, nan_wtd='omit'):
     high = mean + se
     low = mean - se
 
-    return mean, high, low
+    return mean, low, high
 
 
 
